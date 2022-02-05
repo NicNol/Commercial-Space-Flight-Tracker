@@ -1,5 +1,5 @@
 {
-    "name": "Commercial Space Flight Tracker",
+    "name": "commercial-space-flight-tracker",
     "version": "1.0.0",
     "description": "TBD",
     "main": "index.js",
@@ -18,6 +18,7 @@
     "author": "Nic Nolan, Joe Thompson",
     "license": "ISC",
     "dependencies": {
+        "@chakra-ui/icons": "^1.1.1",
         "@chakra-ui/react": "^1.7.4",
         "@emotion/react": "^11.7.1",
         "@emotion/styled": "^11.6.0",
@@ -32,7 +33,8 @@
         "pdf-parse": "^1.1.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "react-hot-loader": "^4.13.0"
+        "react-icons": "^4.3.1",
+        "react-router-dom": "^6.2.1"
     },
     "devDependencies": {
         "@babel/cli": "^7.14.5",

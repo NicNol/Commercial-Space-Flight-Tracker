@@ -1,17 +1,26 @@
 import React from "react";
-import { Box, Flex, Link, Text } from "@chakra-ui/react";
+import { Center, Link, Text } from "@chakra-ui/react";
 
 export default function Footer() {
     return (
-        <Box className="footer" w={"100%"} px={8} py={16}>
+        <Center
+            className="footer"
+            w={"100%"}
+            px={8}
+            py={16}
+            bg={"#eee"}
+            color={"#666"}
+        >
             <Text>
-                Boeing Speckle is an{" "}
-                <Link href="https://github.com/NicNol/Boeing-Speckle">
-                    open source project{" "}
+                Commercial Space Flight Tracker is a project developed by{" "}
+                <Link href="https://github.com/NicNol">Nic Nolan</Link> and{" "}
+                <Link href="https://github.com/jlthompso">Joe Thompson</Link>.
+                See the source code on{" "}
+                <Link href="https://github.com/NicNol/Commercial-Space-Flight-Tracker">
+                    GitHub
                 </Link>
-                developed by{" "}
-                <Link href="https://github.com/NicNol">Nic Nolan</Link>.
+                .
             </Text>
-        </Box>
+        </Center>
     );
 }
