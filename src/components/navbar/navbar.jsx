@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, useBoolean } from "@chakra-ui/react";
-import NavbarMenuToggle from "./NavbarMenuToggle";
-import NavbarMenuLinks from "./NavbarMenuLinks";
+import NavbarMenuToggle from "./navbarMenuToggle";
+import NavbarMenuLinks from "./navbarMenuLinks";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useBoolean(false);

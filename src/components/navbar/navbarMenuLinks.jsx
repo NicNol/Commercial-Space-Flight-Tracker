@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack, Collapse, Flex } from "@chakra-ui/react";
-import MenuItem from "./NavbarMenuItem";
+import NavbarMenuItem from "./navbarMenuItem";
 
 export default function NavbarMenuLinks({ isOpen }) {
     return (
@@ -13,20 +13,24 @@ export default function NavbarMenuLinks({ isOpen }) {
                     py={3}
                     align={"center"}
                 >
-                    <MenuItem to={"/"}>Home</MenuItem>
-                    <MenuItem to={"/agencies"}>Agencies</MenuItem>
-                    <MenuItem to={"/agency-memberships"}>
+                    <NavbarMenuItem to={"/"}>Home</NavbarMenuItem>
+                    <NavbarMenuItem to={"/agencies"}>Agencies</NavbarMenuItem>
+                    <NavbarMenuItem to={"/agency-memberships"}>
                         Agency Memberships
-                    </MenuItem>
-                    <MenuItem to={"/citizenships"}>Citizenships</MenuItem>
-                    <MenuItem to={"/companies"}>Companies</MenuItem>
-                    <MenuItem to={"/countries"}>Countries</MenuItem>
-                    <MenuItem to={"/flight-manifests"}>
+                    </NavbarMenuItem>
+                    <NavbarMenuItem to={"/citizenships"}>
+                        Citizenships
+                    </NavbarMenuItem>
+                    <NavbarMenuItem to={"/companies"}>Companies</NavbarMenuItem>
+                    <NavbarMenuItem to={"/countries"}>Countries</NavbarMenuItem>
+                    <NavbarMenuItem to={"/flight-manifests"}>
                         Flight Manifests
-                    </MenuItem>
-                    <MenuItem to={"/flights"}>Flights</MenuItem>
-                    <MenuItem to={"/participants"}>Participants</MenuItem>
-                    <MenuItem to={"/vehicles"}>Vehicles</MenuItem>
+                    </NavbarMenuItem>
+                    <NavbarMenuItem to={"/flights"}>Flights</NavbarMenuItem>
+                    <NavbarMenuItem to={"/participants"}>
+                        Participants
+                    </NavbarMenuItem>
+                    <NavbarMenuItem to={"/vehicles"}>Vehicles</NavbarMenuItem>
                 </Stack>
             </Collapse>
         </Flex>

@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Text } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
-export default function MenuItem({ children, to = "/" }) {
+export default function NavbarMenuItem({ children, to = "/" }) {
     return (
         <Link
             as={RouterLink}
