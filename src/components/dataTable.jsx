@@ -50,6 +50,9 @@ export default function DataTable({
                     return (
                         <Tr key={index}>
                             {row.map((cell) => {
+                                if (typeof(cell) === "boolean") {
+                                    cell ? cell = "Yes" : cell = "No";
+                                }
                                 return <Td key={index + cell}>{cell}</Td>;
                             })}
                             {displayActions ? actionBlock : ""}
