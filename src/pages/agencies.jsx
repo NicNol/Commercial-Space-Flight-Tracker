@@ -1,7 +1,8 @@
 import React from "react";
 import PageWrapper from "../components/pageWrapper";
+import ActionBar from "../components/actionBar";
 import DataTable from "../components/dataTable";
-import { Heading } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 
 export default function Agencies() {
     const columnHeaders = ["AgencyID", "AgencyName"];
@@ -13,9 +14,13 @@ export default function Agencies() {
 
     return (
         <PageWrapper>
-            <Heading textAlign={"center"} size={"md"}>
-                Table: Agencies
-            </Heading>
+            <Heading size={"md"}>Table: Agencies</Heading>
+            <Text>
+                This table records each government agency acting as a launch
+                provider using a unique ID so that agency names are consistent
+                across the database.
+            </Text>
+            <ActionBar />
             <DataTable columnHeaders={columnHeaders} data={data} />
         </PageWrapper>
     );

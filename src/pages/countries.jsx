@@ -1,7 +1,8 @@
 import React from "react";
 import PageWrapper from "../components/pageWrapper";
 import DataTable from "../components/dataTable";
-import { Heading } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
+import ActionBar from "../components/actionBar";
 
 export default function Countries() {
     const columnHeaders = ["CountryID", "CountryName"];
@@ -13,9 +14,12 @@ export default function Countries() {
 
     return (
         <PageWrapper>
-            <Heading textAlign={"center"} size={"md"}>
-                Table: Countries
-            </Heading>
+            <Heading size={"md"}>Table: Countries</Heading>
+            <Text>
+                This table records each country using a unique ID so that
+                country names are consistent across the database.
+            </Text>
+            <ActionBar />
             <DataTable columnHeaders={columnHeaders} data={data} />
         </PageWrapper>
     );
