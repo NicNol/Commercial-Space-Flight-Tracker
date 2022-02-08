@@ -1,40 +1,12 @@
 import React from "react";
-import {
-    Flex,
-    IconButton,
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td,
-} from "@chakra-ui/react";
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import ActionCell from "./actionCell";
 
 export default function DataTable({
     columnHeaders,
     data,
     displayActions = true,
 }) {
-    const actionBlock = (
-        <Td>
-            <Flex gap={2}>
-                <IconButton
-                    aria-label={"edit"}
-                    icon={<EditIcon w={8} h={8} />}
-                    colorScheme={"blue"}
-                    p={4}
-                />
-                <IconButton
-                    aria-label={"delete"}
-                    icon={<DeleteIcon w={8} h={8} />}
-                    colorScheme={"red"}
-                    p={4}
-                />
-            </Flex>
-        </Td>
-    );
-
     return (
         <Table variant={"striped"} color={"black"}>
             <Thead>
@@ -50,12 +22,12 @@ export default function DataTable({
                     return (
                         <Tr key={index}>
                             {row.map((cell) => {
-                                if (typeof(cell) === "boolean") {
-                                    cell ? cell = "Yes" : cell = "No";
+                                if (typeof cell === "boolean") {
+                                    cell ? (cell = "Yes") : (cell = "No");
                                 }
                                 return <Td key={index + cell}>{cell}</Td>;
                             })}
-                            {displayActions ? actionBlock : ""}
+                            {displayActions ? <ActionCell /> : ""}
                         </Tr>
                     );
                 })}
