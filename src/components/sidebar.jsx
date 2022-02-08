@@ -11,7 +11,9 @@ export default function Sidebar() {
     return (
         <Flex
             h={"100%"}
-            w={"250px"}
+            w={"200px"}
+            maxW={"200px"}
+            minW={"200px"}
             display={["none", null, null, "flex"]}
             px={2}
             flexDirection={"column"}

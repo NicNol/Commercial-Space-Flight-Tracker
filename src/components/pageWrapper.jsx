@@ -29,10 +29,12 @@ export default function PageWrapper({ children }) {
                     w={"100%"}
                 >
                     <Box w={"100%"}>
-                        <Flex w={"100%"} justifyContent={"flex-start"} py={8}>
-                            <Flex px={4} flexGrow={1}>
+                        <Flex w={"100%"} py={8}>
+                            <Flex px={4} w={"100%"}>
                                 <Sidebar />
-                                <Box w={"100%"}>{children}</Box>
+                                <Box flexGrow={1} overflowX={"auto"}>
+                                    {children}
+                                </Box>
                             </Flex>
                         </Flex>
                     </Box>
