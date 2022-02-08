@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { Box, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import ActionCell from "./actionCell";
 
 export default function DataTable({
@@ -8,7 +8,7 @@ export default function DataTable({
     displayActions = true,
 }) {
     return (
-        <Table variant={"striped"} color={"black"}>
+        <Table variant={"striped"} color={"black"} w={"100%"}>
             <Thead>
                 <Tr>
                     {columnHeaders.map((header) => {
