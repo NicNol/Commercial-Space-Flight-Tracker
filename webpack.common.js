@@ -16,12 +16,6 @@ module.exports = {
                 use: ["style-loader", "css-loader"],
             },
         ],
-        loaders: [
-            {
-                test: /\.json$/,
-                loader: "json-loader",
-            },
-        ],
     },
     resolve: { extensions: ["*", ".js", ".jsx"] },
     output: {
