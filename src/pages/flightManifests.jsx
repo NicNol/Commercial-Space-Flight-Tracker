@@ -1,6 +1,6 @@
 import React from "react";
 import PageWrapper from "../components/pageWrapper";
-import DataTable from "../components/dataTable";
+import DataTable from "../components/dataTable/dataTable";
 import { Heading, Text } from "@chakra-ui/react";
 import ActionBar from "../components/actionBar";
 
@@ -19,8 +19,12 @@ export default function FlightManifests() {
                 This table is used to implement a Many:Many relationship between
                 Flights and Participants.
             </Text>
-            <ActionBar />
-            <DataTable columnHeaders={columnHeaders} data={data} />
+            <ActionBar tableName={"FlightManifests"} />
+            <DataTable
+                columnHeaders={columnHeaders}
+                data={data}
+                tableName={"FlightManifests"}
+            />
         </PageWrapper>
     );
 }

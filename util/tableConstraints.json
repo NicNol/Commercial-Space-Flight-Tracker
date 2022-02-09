@@ -1,0 +1,308 @@
+{
+    "Agencies": {
+        "columns": [
+            {
+                "columnName": "AgencyID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": false,
+                "defaultValue": 0,
+                "required": true,
+                "assigned": true
+            },
+            {
+                "columnName": "AgencyName",
+                "datatype": "String",
+                "maxLength": 255,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            }
+        ]
+    },
+    "AgencyMemberships": {
+        "columns": [
+            {
+                "columnName": "MembershipID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": false,
+                "defaultValue": 0,
+                "required": true,
+                "assigned": true
+            },
+            {
+                "columnName": "AgencyID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "CountryID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            }
+        ]
+    },
+    "Citizenships": {
+        "columns": [
+            {
+                "columnName": "CitizenshipID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": false,
+                "defaultValue": 0,
+                "required": true,
+                "assigned": true
+            },
+            {
+                "columnName": "ParticipantID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "CountryID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            }
+        ]
+    },
+    "Companies": {
+        "columns": [
+            {
+                "columnName": "CompanyID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": false,
+                "defaultValue": 0,
+                "required": true,
+                "assigned": true
+            },
+            {
+                "columnName": "CompanyName",
+                "datatype": "String",
+                "maxLength": 255,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "HeadquartsCountryID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            }
+        ]
+    },
+    "Countries": {
+        "columns": [
+            {
+                "columnName": "CountryID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": false,
+                "defaultValue": 0,
+                "required": true,
+                "assigned": true
+            },
+            {
+                "columnName": "CountryName",
+                "datatype": "String",
+                "maxLength": 255,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            }
+        ]
+    },
+    "FlightManifests": {
+        "columns": [
+            {
+                "columnName": "ManifestID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": false,
+                "defaultValue": 0,
+                "required": true,
+                "assigned": true
+            },
+            {
+                "columnName": "FlightID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "ParticipantID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            }
+        ]
+    },
+    "Flights": {
+        "columns": [
+            {
+                "columnName": "FlightID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": false,
+                "defaultValue": 0,
+                "required": true,
+                "assigned": true
+            },
+            {
+                "columnName": "VehicleID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "AgencyID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": false,
+                "assigned": false
+            },
+            {
+                "columnName": "LaunchCountryID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "LaunchDate",
+                "datatype": "Date",
+                "maxLength": null,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "MaximumAltitude",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "MissionName",
+                "datatype": "String",
+                "maxLength": 255,
+                "editable": true,
+                "defaultValue": "",
+                "required": false,
+                "assigned": false
+            }
+        ]
+    },
+    "Participants": {
+        "columns": [
+            {
+                "columnName": "ParticipantID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": false,
+                "defaultValue": 0,
+                "required": true,
+                "assigned": true
+            },
+            {
+                "columnName": "FirstName",
+                "datatype": "String",
+                "maxLength": 255,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "LastName",
+                "datatype": "String",
+                "maxLength": 255,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "IsAstronaut",
+                "datatype": "Boolean",
+                "maxLength": null,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            },
+            {
+                "columnName": "DateOfBirth",
+                "datatype": "Date",
+                "maxLength": null,
+                "editable": true,
+                "defaultValue": "",
+                "required": false,
+                "assigned": false
+            }
+        ]
+    },
+    "Vehicles": {
+        "columns": [
+            {
+                "columnName": "VehicleID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "editable": false,
+                "defaultValue": 0,
+                "required": true,
+                "assigned": true
+            },
+            {
+                "columnName": "VehicleName",
+                "datatype": "String",
+                "maxLength": 255,
+                "editable": true,
+                "defaultValue": "",
+                "required": true,
+                "assigned": false
+            }
+        ]
+    }
+}

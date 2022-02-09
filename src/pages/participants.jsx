@@ -1,6 +1,6 @@
 import React from "react";
 import PageWrapper from "../components/pageWrapper";
-import DataTable from "../components/dataTable";
+import DataTable from "../components/dataTable/dataTable";
 import { Heading, Text } from "@chakra-ui/react";
 import ActionBar from "../components/actionBar";
 
@@ -24,8 +24,12 @@ export default function Participants() {
                 This table is used to record the personal details of
                 participants in space flights.
             </Text>
-            <ActionBar />
-            <DataTable columnHeaders={columnHeaders} data={data} />
+            <ActionBar tableName={"Participants"} />
+            <DataTable
+                columnHeaders={columnHeaders}
+                data={data}
+                tableName={"Participants"}
+            />
         </PageWrapper>
     );
 }

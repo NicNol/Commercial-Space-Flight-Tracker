@@ -1,7 +1,7 @@
 import React from "react";
 import PageWrapper from "../components/pageWrapper";
 import ActionBar from "../components/actionBar";
-import DataTable from "../components/dataTable";
+import DataTable from "../components/dataTable/dataTable";
 import { Heading, Text } from "@chakra-ui/react";
 
 export default function Agencies() {
@@ -20,8 +20,12 @@ export default function Agencies() {
                 provider using a unique ID so that agency names are consistent
                 across the database.
             </Text>
-            <ActionBar />
-            <DataTable columnHeaders={columnHeaders} data={data} />
+            <ActionBar tableName={"Agencies"} />
+            <DataTable
+                columnHeaders={columnHeaders}
+                data={data}
+                tableName={"Agencies"}
+            />
         </PageWrapper>
     );
 }

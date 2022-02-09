@@ -1,6 +1,6 @@
 import React from "react";
 import PageWrapper from "../components/pageWrapper";
-import DataTable from "../components/dataTable";
+import DataTable from "../components/dataTable/dataTable";
 import { Heading, Text } from "@chakra-ui/react";
 import ActionBar from "../components/actionBar";
 
@@ -20,8 +20,12 @@ export default function Citizenships() {
                 Participants and Countries to maintain information on each
                 participant&apos;s known citizenships.
             </Text>
-            <ActionBar />
-            <DataTable columnHeaders={columnHeaders} data={data} />
+            <ActionBar tableName={"Citizenships"} />
+            <DataTable
+                columnHeaders={columnHeaders}
+                data={data}
+                tableName={"Citizenships"}
+            />
         </PageWrapper>
     );
 }

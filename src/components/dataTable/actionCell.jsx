@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Flex, IconButton, Td } from "@chakra-ui/react";
+import { Flex, IconButton, Td, useDisclosure } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
-import DialogBox from "./dialogBox";
+import DataModal from "../dataModal";
+import DialogBox from "../dialogBox";
 
-export default function ActionCell() {
+export default function ActionCell({ tableName, data }) {
     const [alertOpen, setAlertOpen] = useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
         <Td>
             <Flex gap={2}>
@@ -13,6 +16,7 @@ export default function ActionCell() {
                     icon={<EditIcon w={8} h={8} />}
                     colorScheme={"blue"}
                     p={4}
+                    onClick={onOpen}
                 />
                 <IconButton
                     aria-label={"delete"}
@@ -20,6 +24,12 @@ export default function ActionCell() {
                     colorScheme={"red"}
                     p={4}
                     onClick={() => setAlertOpen(true)}
+                />
+                <DataModal
+                    onClose={onClose}
+                    isOpen={isOpen}
+                    tableName={tableName}
+                    data={data}
                 />
                 <DialogBox
                     isOpen={alertOpen}

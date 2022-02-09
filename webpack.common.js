@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const json = require("./file.json");
 
 module.exports = {
     entry: ["./src/index.js"],
@@ -14,6 +15,12 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"],
+            },
+        ],
+        loaders: [
+            {
+                test: /\.json$/,
+                loader: "json-loader",
             },
         ],
     },

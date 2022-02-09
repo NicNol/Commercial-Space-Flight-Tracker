@@ -1,6 +1,6 @@
 import React from "react";
 import PageWrapper from "../components/pageWrapper";
-import DataTable from "../components/dataTable";
+import DataTable from "../components/dataTable/dataTable";
 import { Heading, Text } from "@chakra-ui/react";
 import ActionBar from "../components/actionBar";
 
@@ -25,8 +25,12 @@ export default function Flights() {
             <Text>
                 This table is used to record the details of each space flight.
             </Text>
-            <ActionBar />
-            <DataTable columnHeaders={columnHeaders} data={data} />
+            <ActionBar tableName={"Flights"} />
+            <DataTable
+                columnHeaders={columnHeaders}
+                data={data}
+                tableName={"Flights"}
+            />
         </PageWrapper>
     );
 }

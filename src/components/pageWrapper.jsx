@@ -32,7 +32,7 @@ export default function PageWrapper({ children }) {
                         <Flex w={"100%"} py={8}>
                             <Flex px={4} w={"100%"}>
                                 <Sidebar />
-                                <Box w={"100%"} overflow={"hidden"}>
+                                <Box w={"100%"} overflow={"hidden"} px={1}>
                                     {children}
                                 </Box>
                             </Flex>
