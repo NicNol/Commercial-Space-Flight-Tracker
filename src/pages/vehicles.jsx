@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageWrapper from "../components/pageWrapper";
 import DataTable from "../components/dataTable/dataTable";
 import { Heading, Text } from "@chakra-ui/react";
@@ -12,6 +12,22 @@ export default function Vehicles() {
         [2, "Soyuz"],
     ];
 
+    const [filterValue, setFilterValue] = useState("");
+    const [tableState, setTableState] = useState(data);
+
+    useEffect(() => filterResults(filterValue), [filterValue]);
+
+    function filterResults(filterValue) {
+        const newTableState = data.filter((row) => {
+            let output = false;
+            row.forEach((cell) =>
+                cell.toString().includes(filterValue) ? (output = true) : ""
+            );
+            return output;
+        });
+        setTableState(newTableState);
+    }
+
     return (
         <PageWrapper>
             <Heading size={"md"}>Table: Vehicles</Heading>
@@ -20,10 +36,10 @@ export default function Vehicles() {
                 family using a unique ID so that vehicle names are consistent
                 across the database.
             </Text>
-            <ActionBar tableName={"Vehicles"} />
+            <ActionBar tableName={"Vehicles"} setFilterValue={setFilterValue} />
             <DataTable
                 columnHeaders={columnHeaders}
-                data={data}
+                data={tableState}
                 tableName={"Vehicles"}
             />
         </PageWrapper>

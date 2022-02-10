@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageWrapper from "../components/pageWrapper";
 import DataTable from "../components/dataTable/dataTable";
 import { Heading, Text } from "@chakra-ui/react";
@@ -12,6 +12,22 @@ export default function AgencyMemberships() {
         [2, 2, 2],
     ];
 
+    const [filterValue, setFilterValue] = useState("");
+    const [tableState, setTableState] = useState(data);
+
+    useEffect(() => filterResults(filterValue), [filterValue]);
+
+    function filterResults(filterValue) {
+        const newTableState = data.filter((row) => {
+            let output = false;
+            row.forEach((cell) =>
+                cell.toString().includes(filterValue) ? (output = true) : ""
+            );
+            return output;
+        });
+        setTableState(newTableState);
+    }
+
     return (
         <PageWrapper>
             <Heading size={"md"}>Table: AgencyMemberships</Heading>
@@ -19,10 +35,13 @@ export default function AgencyMemberships() {
                 This table is used to implement a Many:Many relationship between
                 Agencies and Countries.
             </Text>
-            <ActionBar tableName={"AgencyMemberships"} />
+            <ActionBar
+                tableName={"AgencyMemberships"}
+                setFilterValue={setFilterValue}
+            />
             <DataTable
                 columnHeaders={columnHeaders}
-                data={data}
+                data={tableState}
                 tableName={"AgencyMemberships"}
             />
         </PageWrapper>
