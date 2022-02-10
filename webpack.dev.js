@@ -6,9 +6,11 @@ module.exports = merge(common, {
     mode: "development",
     devtool: "inline-source-map",
     devServer: {
-        contentBase: path.join(__dirname, "public/"),
         port: 3000,
-        publicPath: "http://localhost:3000/dist/",
+        static: {
+            directory: path.join(__dirname, "public/"),
+            publicPath: "http://localhost:3000/dist/",
+        },
         proxy: {
             "/**": "http://localhost:5000",
         },
