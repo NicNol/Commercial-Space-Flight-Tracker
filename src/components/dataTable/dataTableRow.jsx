@@ -18,12 +18,18 @@ export default function DataTableRow({
         return output;
     }
 
-    const cells = data.map((cell) => (
-        <Td key={index.toString() + cell.toString()}>{formatCell(cell)}</Td>
+    const cells = data.map((cell, cellIndex) => (
+        <Td key={tableName + index.toString() + "x" + cellIndex.toString()}>
+            {formatCell(cell)}
+        </Td>
     ));
 
     const actionCell = displayActions ? (
-        <ActionCell key={index} tableName={tableName} data={data} />
+        <ActionCell
+            key={tableName + index + "action"}
+            tableName={tableName}
+            data={data}
+        />
     ) : (
         ""
     );

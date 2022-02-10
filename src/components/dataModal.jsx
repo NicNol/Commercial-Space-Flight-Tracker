@@ -30,7 +30,7 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
                 : "";
 
             return (
-                <Box>
+                <Box key={tableName + "-modal-" + index}>
                     <Text>{columnName}</Text>
                     <Input
                         value={cellValue}

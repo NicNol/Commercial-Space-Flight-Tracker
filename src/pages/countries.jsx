@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PageWrapper from "../components/pageWrapper";
 import DataTable from "../components/dataTable/dataTable";
 import { Heading, Text } from "@chakra-ui/react";
@@ -12,6 +12,22 @@ export default function Countries() {
         [2, "China"],
     ];
 
+    const [filterValue, setFilterValue] = useState("");
+    const [tableState, setTableState] = useState(data);
+
+    useEffect(() => filterResults(filterValue), [filterValue]);
+
+    function filterResults(filterValue) {
+        const newTableState = data.filter((row) => {
+            let output = false;
+            row.forEach((cell) =>
+                cell.toString().includes(filterValue) ? (output = true) : ""
+            );
+            return output;
+        });
+        setTableState(newTableState);
+    }
+
     return (
         <PageWrapper>
             <Heading size={"md"}>Table: Countries</Heading>
@@ -19,10 +35,13 @@ export default function Countries() {
                 This table records each country using a unique ID so that
                 country names are consistent across the database.
             </Text>
-            <ActionBar tableName={"Countries"} />
+            <ActionBar
+                tableName={"Countries"}
+                setFilterValue={setFilterValue}
+            />
             <DataTable
                 columnHeaders={columnHeaders}
-                data={data}
+                data={tableState}
                 tableName={"Countries"}
             />
         </PageWrapper>
