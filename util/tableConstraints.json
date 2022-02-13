@@ -5,7 +5,7 @@
                 "columnName": "AgencyID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": false,
+                "readOnly": true,
                 "defaultValue": 0,
                 "required": true,
                 "assigned": true
@@ -14,7 +14,7 @@
                 "columnName": "AgencyName",
                 "datatype": "String",
                 "maxLength": 255,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
                 "assigned": false
@@ -27,7 +27,7 @@
                 "columnName": "MembershipID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": false,
+                "readOnly": true,
                 "defaultValue": 0,
                 "required": true,
                 "assigned": true
@@ -36,19 +36,29 @@
                 "columnName": "AgencyID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
-                "assigned": false
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Agencies",
+                    "keyColumnName": "AgencyID",
+                    "dropdownColumnNames": ["AgencyName"]
+                }
             },
             {
                 "columnName": "CountryID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
-                "assigned": false
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Countries",
+                    "columnName": "CountryID",
+                    "dropdownColumnNames": ["CountryName"]
+                }
             }
         ]
     },
@@ -58,7 +68,7 @@
                 "columnName": "CitizenshipID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": false,
+                "readOnly": true,
                 "defaultValue": 0,
                 "required": true,
                 "assigned": true
@@ -67,19 +77,29 @@
                 "columnName": "ParticipantID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
-                "assigned": false
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Participants",
+                    "columnName": "ParticipantID",
+                    "dropdownColumnNames": ["FirstName", "LastName"]
+                }
             },
             {
                 "columnName": "CountryID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
-                "assigned": false
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Countries",
+                    "columnName": "CountryID",
+                    "dropdownColumnNames": ["CountryName"]
+                }
             }
         ]
     },
@@ -89,7 +109,7 @@
                 "columnName": "CompanyID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": false,
+                "readOnly": true,
                 "defaultValue": 0,
                 "required": true,
                 "assigned": true
@@ -98,19 +118,24 @@
                 "columnName": "CompanyName",
                 "datatype": "String",
                 "maxLength": 255,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
                 "assigned": false
             },
             {
-                "columnName": "HeadquartsCountryID",
+                "columnName": "HeadquartersCountryID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
-                "assigned": false
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Countries",
+                    "columnName": "CountryID",
+                    "dropdownColumnNames": ["CountryName"]
+                }
             }
         ]
     },
@@ -120,7 +145,7 @@
                 "columnName": "CountryID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": false,
+                "readOnly": true,
                 "defaultValue": 0,
                 "required": true,
                 "assigned": true
@@ -129,7 +154,7 @@
                 "columnName": "CountryName",
                 "datatype": "String",
                 "maxLength": 255,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
                 "assigned": false
@@ -142,7 +167,7 @@
                 "columnName": "ManifestID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": false,
+                "readOnly": true,
                 "defaultValue": 0,
                 "required": true,
                 "assigned": true
@@ -151,19 +176,29 @@
                 "columnName": "FlightID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
-                "assigned": false
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Flights",
+                    "columnName": "FlightID",
+                    "dropdownColumnNames": ["LaunchDate", "MissionName"]
+                }
             },
             {
                 "columnName": "ParticipantID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
-                "assigned": false
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Participants",
+                    "columnName": "ParticipantID",
+                    "dropdownColumnNames": ["FirstName", "LastName"]
+                }
             }
         ]
     },
@@ -173,7 +208,7 @@
                 "columnName": "FlightID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": false,
+                "readOnly": true,
                 "defaultValue": 0,
                 "required": true,
                 "assigned": true
@@ -182,34 +217,49 @@
                 "columnName": "VehicleID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
-                "assigned": false
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Vehicles",
+                    "columnName": "VehicleID",
+                    "dropdownColumnNames": ["VehicleName"]
+                }
             },
             {
                 "columnName": "AgencyID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": false,
-                "assigned": false
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Agencies",
+                    "columnName": "AgencyID",
+                    "dropdownColumnNames": ["AgencyName"]
+                }
             },
             {
                 "columnName": "LaunchCountryID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
-                "assigned": false
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Countries",
+                    "columnName": "CountryID",
+                    "dropdownColumnNames": ["CountryName"]
+                }
             },
             {
                 "columnName": "LaunchDate",
                 "datatype": "Date",
                 "maxLength": null,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
                 "assigned": false
@@ -218,7 +268,7 @@
                 "columnName": "MaximumAltitude",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
                 "assigned": false
@@ -227,7 +277,7 @@
                 "columnName": "MissionName",
                 "datatype": "String",
                 "maxLength": 255,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": false,
                 "assigned": false
@@ -240,7 +290,7 @@
                 "columnName": "ParticipantID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": false,
+                "readOnly": true,
                 "defaultValue": 0,
                 "required": true,
                 "assigned": true
@@ -249,7 +299,7 @@
                 "columnName": "FirstName",
                 "datatype": "String",
                 "maxLength": 255,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
                 "assigned": false
@@ -258,7 +308,7 @@
                 "columnName": "LastName",
                 "datatype": "String",
                 "maxLength": 255,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
                 "assigned": false
@@ -267,7 +317,7 @@
                 "columnName": "IsAstronaut",
                 "datatype": "Boolean",
                 "maxLength": null,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
                 "assigned": false
@@ -276,7 +326,7 @@
                 "columnName": "DateOfBirth",
                 "datatype": "Date",
                 "maxLength": null,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": false,
                 "assigned": false
@@ -289,7 +339,7 @@
                 "columnName": "VehicleID",
                 "datatype": "Number",
                 "maxLength": 11,
-                "editable": false,
+                "readOnly": true,
                 "defaultValue": 0,
                 "required": true,
                 "assigned": true
@@ -298,7 +348,7 @@
                 "columnName": "VehicleName",
                 "datatype": "String",
                 "maxLength": 255,
-                "editable": true,
+                "readOnly": false,
                 "defaultValue": "",
                 "required": true,
                 "assigned": false
