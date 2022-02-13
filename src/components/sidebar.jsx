@@ -17,19 +17,19 @@ export default function Sidebar() {
             display={["none", null, null, "flex"]}
             px={2}
             flexDirection={"column"}
-            gap={notHome() ? 4 : 0}
+            gap={4}
         >
             <Link as={RouterLink} to="/">
                 <Button
                     leftIcon={<ArrowLeftIcon />}
                     variant={"ghost"}
                     w={"100%"}
-                    display={notHome() ? "block" : "none"}
+                    visibility={notHome() ? "visible" : "hidden"}
                 >
                     Home
                 </Button>
             </Link>
-            <Divider display={notHome() ? "block" : "none"} />
+            <Divider visibility={notHome() ? "visible" : "hidden"} />
             <Box>
                 <Heading size={"md"} textDecoration={"underline"}>
                     Manage Tables:
@@ -61,6 +61,22 @@ export default function Sidebar() {
                     </Link>
                     <Link as={RouterLink} to="/vehicles">
                         Vehicles
+                    </Link>
+                </Flex>
+            </Box>
+            <Box>
+                <Heading size={"md"} textDecoration={"underline"}>
+                    Quick Views:
+                </Heading>
+                <Flex direction={"column"} pl={2} fontWeight={"400"}>
+                    <Link as={RouterLink} to="/agencies">
+                        American Flights
+                    </Link>
+                    <Link as={RouterLink} to="/agency-memberships">
+                        Latest Flight Manifest
+                    </Link>
+                    <Link as={RouterLink} to="/citizenships">
+                        Highest Launches
                     </Link>
                 </Flex>
             </Box>
