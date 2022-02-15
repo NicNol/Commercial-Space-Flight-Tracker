@@ -22,8 +22,8 @@ MYSQL_DATABASE="<mySQL Database Name>"
 
 ## Run
 
-Next, call `node run dev-start-back`. This will start the backend server in development mode ([Express](https://expressjs.com/) with [nodemon](https://www.npmjs.com/package/nodemon)).
+Next, call `npm run dev-start-back`. This will start the backend server in development mode ([Express](https://expressjs.com/) with [nodemon](https://www.npmjs.com/package/nodemon)).
 
-Then, open a new terminal window and navigate to the root of the project directory. Call `node run dev-start-front`. This will start the frontend server in development mode ([webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), and [React](https://reactjs.org/)).
+Then, open a new terminal window and navigate to the root of the project directory. Call `npm run dev-start-front`. This will start the frontend server in development mode ([webpack](https://webpack.js.org/), [Babel](https://babeljs.io/), and [React](https://reactjs.org/)).
 
 The previous call should open a browser window and navigate to `localhost:3000`. This is the project running locally on your machine. 🎉🎉🎉
