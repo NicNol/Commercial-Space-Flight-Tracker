@@ -9,14 +9,15 @@ export default function Flights() {
         "FlightID",
         "VehicleID",
         "AgencyID",
+        "CompanyID",
         "LaunchCountryID",
         "LaunchDate",
         "MaximumAltitude",
         "MissionName",
     ];
     const data = [
-        [0, 0, 0, 0, "2021-10-13", 106, "M16"],
-        [1, 1, 1, 1, "2020-11-16", 400, "Crew-1"],
+        [0, 0, 0, 0, 0, "2021-10-13", 106, "M16"],
+        [1, 1, 1, 1, 1, "2020-11-16", 400, "Crew-1"],
     ];
 
     const [filterValue, setFilterValue] = useState("");

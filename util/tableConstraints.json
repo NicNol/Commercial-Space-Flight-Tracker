@@ -242,6 +242,20 @@
                 }
             },
             {
+                "columnName": "CompanyID",
+                "datatype": "Number",
+                "maxLength": 11,
+                "readOnly": false,
+                "defaultValue": "",
+                "required": false,
+                "assigned": false,
+                "foreignKey": {
+                    "tableName": "Companies",
+                    "columnName": "CompanyID",
+                    "dropdownColumnNames": ["CompanyName"]
+                }
+            },
+            {
                 "columnName": "LaunchCountryID",
                 "datatype": "Number",
                 "maxLength": 11,

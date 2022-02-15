@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Box,
     Button,
@@ -17,6 +17,23 @@ import {
 import tableConstraints from "../../util/tableConstraints.json";
 
 export default function DataModal({ onClose, isOpen, tableName, data }) {
+    const [agencyID, setAgencyID] = useState("NULL");
+    const [companyID, setCompanyID] = useState("NULL");
+    const handleChange = (event, columnName) => {
+        if (columnName === "AgencyID") {
+            setAgencyID(event.target.value)
+            setCompanyID("NULL")
+        } else if (columnName === "CompanyID") {
+            setCompanyID(event.target.value)
+            setAgencyID("NULL")
+        };
+    };
+    const handleClose = (event) => {
+        setAgencyID("NULL");
+        setCompanyID("NULL");
+        onClose(event);
+    };
+
     const modalHeader = data ? "Edit Entry" : "New Entry";
     const formData = tableConstraints[tableName].columns.map(
         (column, index) => {
@@ -46,9 +63,19 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
                     defaultValue={cellValue}
                     isRequired={required}
                     isReadOnly={readOnly}
-                    isDisabled={assigned}
+                    isDisabled={tableName === "Flights"
+                        ? columnName === "AgencyID" && companyID !== "NULL"
+                            ? true
+                            : columnName === "CompanyID" && agencyID !== "NULL"
+                                ? true
+                                : assigned
+                        : assigned}
                     variant={assigned ? "filled" : "outline"}
+                    onChange={(event) => handleChange(event, columnName)}
                 >
+                    {tableName === "Flights" && (columnName === "AgencyID" || columnName === "CompanyID")
+                        ? <option value="NULL">NULL</option>
+                        : ""}
                     <option value="Foreign Key Id1">FK Option 1</option>
                     <option value="Foreign Key Id2">FK Option 2</option>
                     <option value="Foreign Key Id3">FK Option 3</option>
@@ -69,7 +96,7 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
 
     return (
         <Modal
-            onClose={onClose}
+            onClose={handleClose}
             isOpen={isOpen}
             isCentered
             closeOnOverlayClick={false}
@@ -90,10 +117,10 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
                 </ModalBody>
                 <ModalFooter>
                     <Flex justifyContent={"flex-end"} gap={1}>
-                        <Button colorScheme={"green"} onClick={onClose}>
+                        <Button colorScheme={"green"} onClick={handleClose}>
                             Save
                         </Button>
-                        <Button colorScheme={"red"} onClick={onClose}>
+                        <Button colorScheme={"red"} onClick={handleClose}>
                             Cancel
                         </Button>
                     </Flex>
