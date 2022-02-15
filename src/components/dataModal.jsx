@@ -49,6 +49,9 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
                     isDisabled={assigned}
                     variant={assigned ? "filled" : "outline"}
                 >
+                    {tableName === "Flights" && (columnName === "AgencyID" || columnName === "CompanyID")
+                        ? <option value="NULL">NULL</option>
+                        : ""}
                     <option value="Foreign Key Id1">FK Option 1</option>
                     <option value="Foreign Key Id2">FK Option 2</option>
                     <option value="Foreign Key Id3">FK Option 3</option>
