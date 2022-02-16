@@ -66,17 +66,11 @@ export default function Sidebar() {
             </Box>
             <Box>
                 <Heading size={"md"} textDecoration={"underline"}>
-                    Quick Views:
+                    Search Tables:
                 </Heading>
                 <Flex direction={"column"} pl={2} fontWeight={"400"}>
-                    <Link as={RouterLink} to="/agencies">
-                        American Flights
-                    </Link>
-                    <Link as={RouterLink} to="/agency-memberships">
-                        Latest Flight Manifest
-                    </Link>
-                    <Link as={RouterLink} to="/citizenships">
-                        Highest Launches
+                    <Link as={RouterLink} to="/search">
+                        Global Search
                     </Link>
                 </Flex>
             </Box>

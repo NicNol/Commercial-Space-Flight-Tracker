@@ -9,6 +9,7 @@ import FlightManifests from "./pages/flightManifests";
 import Flights from "./pages/flights";
 import Home from "./pages/home";
 import Participants from "./pages/participants";
+import Search from "./pages/search";
 import Vehicles from "./pages/vehicles";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <Route path="flights" element={<Flights />} />
                 <Route path="participants" element={<Participants />} />
                 <Route path="vehicles" element={<Vehicles />} />
+                <Route path="search" element={<Search />} />
                 <Route index element={<Home />} />
             </Routes>
         </BrowserRouter>
