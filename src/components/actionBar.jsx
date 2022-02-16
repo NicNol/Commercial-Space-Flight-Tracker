@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     Button,
     Flex,
@@ -7,7 +7,7 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import DataModal from "./dataModal";
+import DataModal from "./dataModal/dataModal";
 
 export default function ActionBar({ tableName, setFilterValue }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
