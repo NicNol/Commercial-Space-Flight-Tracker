@@ -3,6 +3,7 @@ import tableConstraints from "../../../util/tableConstraints.json";
 import DropDown from "./dropDown";
 import DataField from "./dataField";
 import InputBox from "./inputBox";
+import DatePicker from "./datePicker";
 
 export default function FormData({ props }) {
     const { onClose, isOpen, tableName, data } = props;
@@ -25,8 +26,14 @@ export default function FormData({ props }) {
 
     const formData = tableConstraints[tableName].columns.map(
         (column, index) => {
-            const { columnName, required, readOnly, assigned, foreignKey } =
-                column;
+            const {
+                columnName,
+                required,
+                readOnly,
+                assigned,
+                foreignKey,
+                datatype,
+            } = column;
 
             //Determine the value of the field
             let cellValue = "";
@@ -60,6 +67,13 @@ export default function FormData({ props }) {
                     <DropDown
                         key={tableName + "-dropdown-" + index}
                         props={childrenProps}
+                    />
+                );
+            if (datatype === "Date")
+                inputField = (
+                    <DatePicker
+                        key={tableName + "-date-picker-" + index}
+                        props={props}
                     />
                 );
 
