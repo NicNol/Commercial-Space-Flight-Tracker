@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Flex, IconButton, Td, useDisclosure } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
-import DataModal from "../dataModal";
+import DataModal from "../dataModal/dataModal";
 import DialogBox from "../dialogBox";
 
 export default function ActionCell({ tableName, data }) {
