@@ -60,6 +60,7 @@ export default function FormData({ props }) {
                 <InputBox
                     key={tableName + "-input-box-" + index}
                     props={childrenProps}
+                    type={datatype === "Date" ? "date" : "text"}
                 />
             );
             if (foreignKey)
@@ -67,13 +68,6 @@ export default function FormData({ props }) {
                     <DropDown
                         key={tableName + "-dropdown-" + index}
                         props={childrenProps}
-                    />
-                );
-            if (datatype === "Date")
-                inputField = (
-                    <DatePicker
-                        key={tableName + "-date-picker-" + index}
-                        props={props}
                     />
                 );
 
