@@ -3,7 +3,6 @@ import tableConstraints from "../../../util/tableConstraints.json";
 import DropDown from "./dropDown";
 import DataField from "./dataField";
 import InputBox from "./inputBox";
-import DatePicker from "./datePicker";
 
 export default function FormData({ props }) {
     const { onClose, isOpen, tableName, data } = props;
