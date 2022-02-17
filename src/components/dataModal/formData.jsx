@@ -3,7 +3,6 @@ import tableConstraints from "../../../util/tableConstraints.json";
 import DropDown from "./dropDown";
 import DataField from "./dataField";
 import InputBox from "./inputBox";
-import DatePicker from "./datePicker";
 
 export default function FormData({ props }) {
     const { onClose, isOpen, tableName, data } = props;
@@ -60,6 +59,7 @@ export default function FormData({ props }) {
                 <InputBox
                     key={tableName + "-input-box-" + index}
                     props={childrenProps}
+                    type={datatype === "Date" ? "date" : "text"}
                 />
             );
             if (foreignKey)
@@ -67,13 +67,6 @@ export default function FormData({ props }) {
                     <DropDown
                         key={tableName + "-dropdown-" + index}
                         props={childrenProps}
-                    />
-                );
-            if (datatype === "Date")
-                inputField = (
-                    <DatePicker
-                        key={tableName + "-date-picker-" + index}
-                        props={props}
                     />
                 );
 
