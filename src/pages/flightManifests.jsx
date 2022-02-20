@@ -6,19 +6,18 @@ import ActionBar from "../components/actionBar";
 
 export default function FlightManifests() {
     const columnHeaders = ["ManifestID", "FlightID", "ParticipantID"];
-    const data = [
-        [0, 0, 0],
-        [1, 1, 1],
-        [2, 2, 2],
-    ];
 
     const [filterValue, setFilterValue] = useState("");
-    const [tableState, setTableState] = useState(data);
+    const [tableState, setTableState] = useState([]);
+
+    fetch("/api/FlightManifests")
+        .then((response) => response.json())
+        .then((data) => setTableState(data));
 
     useEffect(() => filterResults(filterValue), [filterValue]);
 
     function filterResults(filterValue) {
-        const newTableState = data.filter((row) => {
+        const newTableState = tableState.filter((row) => {
             let output = false;
             row.forEach((cell) =>
                 cell.toString().includes(filterValue) ? (output = true) : ""

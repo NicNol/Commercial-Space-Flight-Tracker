@@ -18,7 +18,8 @@ export default function DataTableRow({
         return output;
     }
 
-    const cells = data.map((cell, cellIndex) => (
+    const dataValues = Object.values(data);
+    const cells = dataValues.map((cell, cellIndex) => (
         <Td key={tableName + index.toString() + "x" + cellIndex.toString()}>
             {formatCell(cell)}
         </Td>

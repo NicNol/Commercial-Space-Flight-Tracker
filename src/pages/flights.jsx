@@ -15,18 +15,18 @@ export default function Flights() {
         "MaximumAltitude",
         "MissionName",
     ];
-    const data = [
-        [0, 0, 0, 0, 0, "2021-10-13", 106, "M16"],
-        [1, 1, 1, 1, 1, "2020-11-16", 400, "Crew-1"],
-    ];
 
     const [filterValue, setFilterValue] = useState("");
-    const [tableState, setTableState] = useState(data);
+    const [tableState, setTableState] = useState([]);
+
+    fetch("/api/Flights")
+        .then((response) => response.json())
+        .then((data) => setTableState(data));
 
     useEffect(() => filterResults(filterValue), [filterValue]);
 
     function filterResults(filterValue) {
-        const newTableState = data.filter((row) => {
+        const newTableState = tableState.filter((row) => {
             let output = false;
             row.forEach((cell) =>
                 cell.toString().includes(filterValue) ? (output = true) : null

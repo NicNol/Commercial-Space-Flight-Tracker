@@ -6,19 +6,18 @@ import ActionBar from "../components/actionBar";
 
 export default function Countries() {
     const columnHeaders = ["CountryID", "CountryName"];
-    const data = [
-        [0, "United States of America"],
-        [1, "Russia"],
-        [2, "China"],
-    ];
 
     const [filterValue, setFilterValue] = useState("");
-    const [tableState, setTableState] = useState(data);
+    const [tableState, setTableState] = useState([]);
+
+    fetch("/api/Countries")
+        .then((response) => response.json())
+        .then((data) => setTableState(data));
 
     useEffect(() => filterResults(filterValue), [filterValue]);
 
     function filterResults(filterValue) {
-        const newTableState = data.filter((row) => {
+        const newTableState = tableState.filter((row) => {
             let output = false;
             row.forEach((cell) =>
                 cell.toString().includes(filterValue) ? (output = true) : ""

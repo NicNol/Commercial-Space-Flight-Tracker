@@ -6,18 +6,18 @@ import { Heading, Text } from "@chakra-ui/react";
 
 export default function Agencies() {
     const columnHeaders = ["AgencyID", "AgencyName"];
-    const data = [
-        [0, "Federal Aviation Administration"],
-        [1, "European Aviation Safety Agency"],
-        [2, "International Civil Aviation Organization"],
-    ];
+
     const [filterValue, setFilterValue] = useState("");
-    const [tableState, setTableState] = useState(data);
+    const [tableState, setTableState] = useState([]);
+
+    fetch("/api/Agencies")
+        .then((response) => response.json())
+        .then((data) => setTableState(data));
 
     useEffect(() => filterResults(filterValue), [filterValue]);
 
     function filterResults(filterValue) {
-        const newTableState = data.filter((row) => {
+        const newTableState = tableState.filter((row) => {
             let output = false;
             row.forEach((cell) =>
                 cell.toString().includes(filterValue) ? (output = true) : null
