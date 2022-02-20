@@ -6,19 +6,18 @@ import ActionBar from "../components/actionBar";
 
 export default function Companies() {
     const columnHeaders = ["CompanyID", "CompanyName", "HeadquartersCountryID"];
-    const data = [
-        [0, "SpaceX", 0],
-        [1, "Blue Origin", 1],
-        [2, "Virgin Galactic", 2],
-    ];
 
     const [filterValue, setFilterValue] = useState("");
-    const [tableState, setTableState] = useState(data);
+    const [tableState, setTableState] = useState([]);
+
+    fetch("/api/Companies")
+        .then((response) => response.json())
+        .then((data) => setTableState(data));
 
     useEffect(() => filterResults(filterValue), [filterValue]);
 
     function filterResults(filterValue) {
-        const newTableState = data.filter((row) => {
+        const newTableState = tableState.filter((row) => {
             let output = false;
             row.forEach((cell) =>
                 cell.toString().includes(filterValue) ? (output = true) : ""

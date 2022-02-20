@@ -12,18 +12,18 @@ export default function Participants() {
         "IsAstronaut",
         "DateOfBirth",
     ];
-    const data = [
-        [0, "Jeffrey", "Ashby", true, "1954-06-16"],
-        [1, "Jeff", "Bezos", false, "1964-01-12"],
-    ];
 
     const [filterValue, setFilterValue] = useState("");
-    const [tableState, setTableState] = useState(data);
+    const [tableState, setTableState] = useState([]);
+
+    fetch("/api/Participants")
+        .then((response) => response.json())
+        .then((data) => setTableState(data));
 
     useEffect(() => filterResults(filterValue), [filterValue]);
 
     function filterResults(filterValue) {
-        const newTableState = data.filter((row) => {
+        const newTableState = tableState.filter((row) => {
             let output = false;
             row.forEach((cell) =>
                 cell.toString().includes(filterValue) ? (output = true) : ""
