@@ -3,28 +3,24 @@ import PageWrapper from "../components/pageWrapper";
 import DataTable from "../components/dataTable/dataTable";
 import { Heading, Text } from "@chakra-ui/react";
 import ActionBar from "../components/actionBar";
+import { fetchData, filterResults } from "../../util/commonFunctions";
 
 export default function Vehicles() {
     const columnHeaders = ["VehicleID", "VehicleName"];
 
     const [filterValue, setFilterValue] = useState("");
     const [tableState, setTableState] = useState([]);
+    const [fetchedData, setFetchedData] = useState([]);
 
-    fetch("/api/Vehicles")
-        .then((response) => response.json())
-        .then((data) => setTableState(data));
+    useEffect(() => fetchData("/api/Vehicles", handleFetchedData), []);
+    useEffect(
+        () => filterResults(filterValue, fetchedData, setTableState),
+        [filterValue]
+    );
 
-    useEffect(() => filterResults(filterValue), [filterValue]);
-
-    function filterResults(filterValue) {
-        const newTableState = tableState.filter((row) => {
-            let output = false;
-            row.forEach((cell) =>
-                cell.toString().includes(filterValue) ? (output = true) : ""
-            );
-            return output;
-        });
-        setTableState(newTableState);
+    function handleFetchedData(data) {
+        setFetchedData(data);
+        setTableState(data);
     }
 
     return (
