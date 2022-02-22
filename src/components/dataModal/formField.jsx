@@ -4,7 +4,7 @@ import DropDown from "./dropDown";
 import DataField from "./dataField";
 import InputBox from "./inputBox";
 
-export default function FormData({ props }) {
+export default function FormField({ props }) {
     const { onClose, isOpen, tableName, data } = props;
     const [agencyID, setAgencyID] = useState("NULL");
     const [companyID, setCompanyID] = useState("NULL");
@@ -36,7 +36,7 @@ export default function FormData({ props }) {
 
             //Determine the value of the field
             let cellValue = "";
-            if (data) cellValue = data[index];
+            if (data.length > 0) cellValue = data[index];
             else if (assigned) cellValue = "auto-assigned";
 
             const childrenProps = {
