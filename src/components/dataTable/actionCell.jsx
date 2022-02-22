@@ -3,10 +3,14 @@ import { Flex, IconButton, Td, useDisclosure } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import DataModal from "../dataModal/dataModal";
 import DialogBox from "../dialogBox";
+import tableConstraints from "../../../util/tableConstraints.json";
 
 export default function ActionCell({ tableName, data }) {
     const [alertOpen, setAlertOpen] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const entityAttributeIDName =
+        tableConstraints[tableName]["columns"][0].columnName;
+    const attributeID = Object.values(data)[0];
 
     return (
         <Td>
@@ -34,6 +38,9 @@ export default function ActionCell({ tableName, data }) {
                 <DialogBox
                     isOpen={alertOpen}
                     onClose={() => setAlertOpen(false)}
+                    tableName={tableName}
+                    attribute={entityAttributeIDName}
+                    entityID={attributeID}
                 />
             </Flex>
         </Td>

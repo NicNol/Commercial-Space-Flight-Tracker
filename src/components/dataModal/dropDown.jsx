@@ -28,6 +28,8 @@ export default function DropDown({ props }) {
 
     return (
         <Select
+            id={columnName + "-input"}
+            name={columnName}
             defaultValue={cellValue}
             isRequired={required}
             isReadOnly={readOnly}

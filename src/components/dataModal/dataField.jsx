@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, FormLabel, Text } from "@chakra-ui/react";
 
 export default function DataField({ children, props }) {
     const { tableName, index, required, columnName } = props;
@@ -8,7 +8,9 @@ export default function DataField({ children, props }) {
         <Box key={tableName + "-modal-" + index}>
             <Flex gap={1}>
                 {required ? <Text color={"red"}>*</Text> : ""}
-                <Text>{columnName}</Text>
+                <FormLabel htmlFor={columnName + "-input"}>
+                    {columnName}
+                </FormLabel>
             </Flex>
             {children}
         </Box>
