@@ -183,7 +183,7 @@
                 "foreignKey": {
                     "tableName": "Flights",
                     "columnName": "FlightID",
-                    "dropdownColumnNames": ["LaunchDate", "MissionName"]
+                    "dropdownColumnNames": ["MissionName"]
                 }
             },
             {
