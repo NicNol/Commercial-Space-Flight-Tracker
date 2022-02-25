@@ -35,7 +35,9 @@ export default function DropDown({ props }) {
     } = props;
 
     const foreignKeys = fetchedData.map(row => (
-        <option value={String(row[foreignKey.columnName])}>{formatSelectOption(row)}</option>
+        <option value={row[foreignKey.columnName]} selected={cellValue === row[foreignKey.columnName] ? "selected" : ""}>
+            {formatSelectOption(row)}
+        </option>
     ));
 
     function getDisabledStatus() {
