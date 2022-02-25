@@ -42,7 +42,7 @@
                 "assigned": false,
                 "foreignKey": {
                     "tableName": "Agencies",
-                    "keyColumnName": "AgencyID",
+                    "columnName": "AgencyID",
                     "dropdownColumnNames": ["AgencyName"]
                 }
             },
