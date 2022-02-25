@@ -34,8 +34,12 @@ export default function DropDown({ props }) {
         foreignKey
     } = props;
 
-    const foreignKeys = fetchedData.map(row => (
-        <option value={row[foreignKey.columnName]} selected={cellValue === row[foreignKey.columnName] ? "selected" : ""}>
+    const foreignKeys = fetchedData.map((row, rowIndex) => (
+        <option 
+            key={tableName + columnName + "x" + rowIndex.toString()}
+            value={row[foreignKey.columnName]}
+            selected={cellValue === row[foreignKey.columnName] ? "selected" : ""}
+        >
             {formatSelectOption(row)}
         </option>
     ));
