@@ -52,7 +52,7 @@ export default function DropDown({ props }) {
 
     return (
         <Select
-            defaultValue={cellValue}
+            defaultValue={Number(cellValue)}
             isRequired={required}
             isReadOnly={readOnly}
             isDisabled={getDisabledStatus()}
