@@ -54,7 +54,7 @@ export default function DropDown({ props }) {
         <Select
             id={columnName + "-input"}
             name={columnName}
-            defaultValue={cellValue}
+            defaultValue={Number(cellValue)}
             isRequired={required}
             isReadOnly={readOnly}
             isDisabled={getDisabledStatus()}
