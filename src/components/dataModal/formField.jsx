@@ -6,8 +6,17 @@ import InputBox from "./inputBox";
 
 export default function FormField({ props }) {
     const { onClose, isOpen, tableName, data } = props;
-    const [agencyID, setAgencyID] = useState("NULL");
-    const [companyID, setCompanyID] = useState("NULL");
+
+    //Initialize starting value of FK dropdown from table data if available
+    let AgencyIdVal = "NULL", CompanyIdVal = "NULL";
+    if (data.length) {
+        const AgencyIdIndex = tableConstraints[tableName].columns.findIndex(col => col.columnName === "AgencyID");
+        const CompanyIdIndex = tableConstraints[tableName].columns.findIndex(col => col.columnName === "CompanyID");
+        AgencyIdVal = data[AgencyIdIndex] !== null ? data[AgencyIdIndex] : "NULL";
+        CompanyIdVal = data[CompanyIdIndex] !== null ? data[CompanyIdIndex] : "NULL";
+    };
+    const [agencyID, setAgencyID] = useState(AgencyIdVal);
+    const [companyID, setCompanyID] = useState(CompanyIdVal);
     const handleChange = (event, columnName) => {
         if (columnName === "AgencyID") {
             setAgencyID(event.target.value);
