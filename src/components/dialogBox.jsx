@@ -9,14 +9,34 @@ import {
     Button,
 } from "@chakra-ui/react";
 
-export default function DialogBox({ isOpen, onClose }) {
+export default function DialogBox({
+    isOpen,
+    onClose,
+    tableName,
+    attribute,
+    entityID,
+}) {
     const cancelRef = useRef();
+
+    function handleDelete() {
+        const deleteBody = {};
+        deleteBody[`${attribute}`] = entityID;
+
+        fetch(`/api/${tableName}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(deleteBody),
+        }).then((res) => {
+            window.location.reload();
+        });
+    }
 
     return (
         <AlertDialog
             isOpen={isOpen}
             leastDestructiveRef={cancelRef}
             onClose={onClose}
+            isCentered
         >
             <AlertDialogOverlay>
                 <AlertDialogContent>
@@ -32,7 +52,7 @@ export default function DialogBox({ isOpen, onClose }) {
                         <Button ref={cancelRef} onClick={onClose}>
                             Cancel
                         </Button>
-                        <Button colorScheme="red" onClick={onClose} ml={3}>
+                        <Button colorScheme="red" onClick={handleDelete} ml={3}>
                             Delete
                         </Button>
                     </AlertDialogFooter>

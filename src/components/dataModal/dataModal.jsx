@@ -11,16 +11,23 @@ import {
     ModalCloseButton,
     Text,
 } from "@chakra-ui/react";
-import FormData from "./formData";
+import FormField from "./formField";
 
 export default function DataModal({ onClose, isOpen, tableName, data }) {
     const modalHeader = data ? "Edit Entry" : "New Entry";
+    const dataValues = Object.values(data);
     const props = {
         onClose: onClose,
         isOpen: isOpen,
         tableName: tableName,
-        data: data,
+        data: dataValues,
     };
+
+    function handleSave() {
+        const formName = `${tableName}Form`;
+        const form = document.getElementById(formName);
+        form.submit();
+    }
 
     return (
         <Modal
@@ -40,12 +47,23 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
                         <Text>Indicates a required field</Text>
                     </Flex>
                     <Flex flexDirection={"column"} gap={2}>
-                        <FormData props={props} />
+                        <form
+                            id={`${tableName}Form`}
+                            action={`/api/${tableName}`}
+                            method={"POST"}
+                        >
+                            {/* <input
+                                type={"hidden"}
+                                name={"_method"}
+                                value={data ? "PUT" : "POST"}
+                            ></input> */}
+                            <FormField props={props} />
+                        </form>
                     </Flex>
                 </ModalBody>
                 <ModalFooter>
                     <Flex justifyContent={"flex-end"} gap={1}>
-                        <Button colorScheme={"green"} onClick={onClose}>
+                        <Button colorScheme={"green"} onClick={handleSave}>
                             Save
                         </Button>
                         <Button

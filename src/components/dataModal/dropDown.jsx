@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Select } from "@chakra-ui/react";
+import { fetchData } from "../../../util/commonFunctions";
 
 export default function DropDown({ props }) {
+    const [fetchedData, setFetchedData] = useState([]);
+
+    useEffect(() => fetchData(`/api/${foreignKey.tableName}`, handleFetchedData), []);
+
+    function handleFetchedData(data) {
+        setFetchedData(data);
+    }
+
+    function formatSelectOption(input) {
+        let output = `${input[foreignKey.columnName]}: `;
+
+        foreignKey.dropdownColumnNames.forEach(fk => {
+            output = `${output} ${input[fk]}`
+        });
+
+        return output;
+    }
+
     const {
         cellValue,
         required,
@@ -12,7 +31,18 @@ export default function DropDown({ props }) {
         companyID,
         agencyID,
         handleChange,
+        foreignKey
     } = props;
+
+    const foreignKeys = fetchedData.map((row, rowIndex) => (
+        <option 
+            key={tableName + columnName + "x" + rowIndex.toString()}
+            value={row[foreignKey.columnName]}
+            selected={cellValue === row[foreignKey.columnName] ? "selected" : ""}
+        >
+            {formatSelectOption(row)}
+        </option>
+    ));
 
     function getDisabledStatus() {
         const output =
@@ -28,6 +58,8 @@ export default function DropDown({ props }) {
 
     return (
         <Select
+            id={columnName + "-input"}
+            name={columnName}
             defaultValue={cellValue}
             isRequired={required}
             isReadOnly={readOnly}
@@ -36,9 +68,7 @@ export default function DropDown({ props }) {
             onChange={(event) => handleChange(event, columnName)}
         >
             {required ? "" : <option value="NULL">NULL</option>}
-            <option value="Foreign Key Id1">FK Option 1</option>
-            <option value="Foreign Key Id2">FK Option 2</option>
-            <option value="Foreign Key Id3">FK Option 3</option>
+            {foreignKeys}
         </Select>
     );
 }
