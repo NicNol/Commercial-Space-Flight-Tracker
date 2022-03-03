@@ -52,11 +52,11 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
                             action={`/api/${tableName}`}
                             method={"POST"}
                         >
-                            {/* <input
+                            {<input
                                 type={"hidden"}
                                 name={"_method"}
                                 value={data ? "PUT" : "POST"}
-                            ></input> */}
+                            ></input>}
                             <FormField props={props} />
                         </form>
                     </Flex>
