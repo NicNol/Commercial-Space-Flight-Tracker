@@ -52,7 +52,7 @@ export default function FormField({ props }) {
                 cellValue: cellValue,
                 required: required,
                 readOnly: readOnly,
-                assigned: assigned,
+                assigned: data.length > 0 ? false : assigned,  // don't disable input if populated
                 foreignKey: foreignKey,
                 tableName: tableName,
                 columnName: columnName,
