@@ -1,5 +1,3 @@
-import { IoReturnUpBackOutline } from "react-icons/io5";
-
 export function filterResults(filterValue, fetchedData, setTableState) {
     const newTableState = fetchedData.filter((row) => {
         let output = false;
