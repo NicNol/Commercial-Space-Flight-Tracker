@@ -2,6 +2,18 @@
 const execute = require("../../util/mysql").execute;
 //const tableConstraints = require("../../../util/tableConstraints.json");
 
+exports.getSearchResults = async function (req, res) {
+    try {
+        const { tableName, columnName, searchCriteria } = req.query;
+        const result = await execute(
+            `SELECT * FROM ${tableName} WHERE ${columnName} LIKE "${searchCriteria}%"`
+        );
+        res.json(result);
+    } catch (err) {
+        res.status(404).json({ Error: err });
+    }
+};
+
 exports.getAll = async function (req, res) {
     const tableName = req.params[0];
     try {
@@ -16,7 +28,7 @@ exports.postAll = async function (req, res) {
     try {
         // _method is passed by the form to indicate if the operation is an update or create
         const method = req.body._method;
-        delete req.body._method;  // property is no longer needed and interferes with parsing
+        delete req.body._method; // property is no longer needed and interferes with parsing
 
         const tableName = req.params[0];
         const columns = Object.keys(req.body);
@@ -27,26 +39,26 @@ exports.postAll = async function (req, res) {
             let whereQuery = "";
             columns.forEach((column, index) => {
                 if (index === 0) {
-                    if (typeof(req.body[column]) === "string") {
+                    if (typeof req.body[column] === "string") {
                         whereQuery = `${column} = "${req.body[column]}"`;
                     } else {
                         whereQuery = `${column} = ${req.body[column]}`;
                     }
                 } else if (setQuery === "") {
-                    if (typeof(req.body[column]) === "string") {
+                    if (typeof req.body[column] === "string") {
                         setQuery = `${column} = "${req.body[column]}"`;
                     } else {
                         setQuery = `${column} = ${req.body[column]}`;
                     }
                 } else {
-                    if (typeof(req.body[column]) === "string") {
+                    if (typeof req.body[column] === "string") {
                         setQuery += `, ${column} = "${req.body[column]}"`;
                     } else {
                         setQuery += `, ${column} = ${req.body[column]}`;
                     }
                 }
             });
-    
+
             // Execute SQL Query
             const result = await execute(
                 `UPDATE ${tableName} SET ${setQuery} WHERE ${whereQuery}`
@@ -54,13 +66,15 @@ exports.postAll = async function (req, res) {
         } else {
             // Create a string of Column Names
             const columnNames = columns.reduce(
-                (previousValue, currentValue) => `${previousValue}, ${currentValue}`
+                (previousValue, currentValue) =>
+                    `${previousValue}, ${currentValue}`
             );
 
             // Create a string of Values
             const values = Object.values(req.body).map((val) => `"${val}"`);
             const requestValues = values.reduce(
-                (previousValue, currentValue) => `${previousValue}, ${currentValue}`
+                (previousValue, currentValue) =>
+                    `${previousValue}, ${currentValue}`
             );
 
             // Execute SQL Query
