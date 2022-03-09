@@ -45,19 +45,29 @@ exports.postAll = async function (req, res) {
                         whereQuery = `${column} = ${req.body[column]}`;
                     }
                 } else if (setQuery === "") {
-                    if (typeof req.body[column] === "string") {
+                    if (typeof req.body[column] === "string" && req.body[column] !== "NULL") {
                         setQuery = `${column} = "${req.body[column]}"`;
                     } else {
                         setQuery = `${column} = ${req.body[column]}`;
                     }
                 } else {
-                    if (typeof req.body[column] === "string") {
+                    if (typeof req.body[column] === "string" && req.body[column] !== "NULL") {
                         setQuery += `, ${column} = "${req.body[column]}"`;
                     } else {
                         setQuery += `, ${column} = ${req.body[column]}`;
                     }
                 }
             });
+
+            // Forms wont submit disabled inputs so NULL values won't be written unless
+            // manually added back into setQuery.
+            if (tableName === "Flights") {
+                if (setQuery.includes("AgencyID")) {
+                    setQuery += ", CompanyID = NULL";
+                } else if (setQuery.includes("CompanyID")) {
+                    setQuery += ", AgencyID = NULL";
+                };
+            };
 
             // Execute SQL Query
             const result = await execute(
@@ -71,7 +81,7 @@ exports.postAll = async function (req, res) {
             );
 
             // Create a string of Values
-            const values = Object.values(req.body).map((val) => `"${val}"`);
+            const values = Object.values(req.body).map((val) => val !== "NULL" ? `"${val}"` : `${val}`);
             const requestValues = values.reduce(
                 (previousValue, currentValue) =>
                     `${previousValue}, ${currentValue}`
