@@ -10,7 +10,7 @@ export default function InputBox({ props, type }) {
             name={columnName}
             type={type}
             defaultValue={
-                (columnName === "DateOfBirth" || columnName === "LaunchDate") && cellValue != null
+                (columnName === "DateOfBirth" || columnName === "LaunchDate") && cellValue
                 ? cellValue.split("T")[0]
                 : cellValue
             }

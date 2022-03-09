@@ -28,8 +28,7 @@ export default function DropDown({ props }) {
         tableName,
         columnName,
         assigned,
-        companyID,
-        agencyID,
+        launchOperator,
         handleChange,
         foreignKey
     } = props;
@@ -47,9 +46,9 @@ export default function DropDown({ props }) {
     function getDisabledStatus() {
         const output =
             tableName === "Flights"
-                ? columnName === "AgencyID" && companyID !== "NULL"
+                ? columnName === "AgencyID" && launchOperator.companyID !== "NULL"
                     ? true
-                    : columnName === "CompanyID" && agencyID !== "NULL"
+                    : columnName === "CompanyID" && launchOperator.agencyID !== "NULL"
                     ? true
                     : assigned
                 : assigned;

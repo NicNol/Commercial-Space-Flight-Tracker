@@ -16,7 +16,7 @@ export default function PageWrapper({ children }) {
                 flexDirection={"column"}
                 minH={"100vh"}
                 w={"100%"}
-                maxW={"1200px"}
+                maxW={"1600px"}
                 bg={"white"}
                 shadow={"2xl"}
             >
