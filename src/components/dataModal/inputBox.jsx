@@ -2,7 +2,14 @@ import React from "react";
 import { Input } from "@chakra-ui/react";
 
 export default function InputBox({ props, type }) {
-    const { cellValue, required, readOnly, assigned, columnName } = props;
+    const {
+        cellValue,
+        required,
+        readOnly,
+        assigned,
+        columnName,
+        handleInputChange,
+    } = props;
 
     return (
         <Input
@@ -10,14 +17,17 @@ export default function InputBox({ props, type }) {
             name={columnName}
             type={type}
             defaultValue={
-                (columnName === "DateOfBirth" || columnName === "LaunchDate") && cellValue
-                ? cellValue.split("T")[0]
-                : cellValue
+                (columnName === "DateOfBirth" || columnName === "LaunchDate") &&
+                cellValue
+                    ? cellValue.split("T")[0]
+                    : cellValue
             }
             isRequired={required}
+            required={required}
             isReadOnly={readOnly}
             isDisabled={assigned}
             variant={assigned ? "filled" : "outline"}
+            onChange={handleInputChange}
         />
     );
 }

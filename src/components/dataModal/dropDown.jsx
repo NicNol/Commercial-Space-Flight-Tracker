@@ -5,7 +5,10 @@ import { fetchData } from "../../../util/commonFunctions";
 export default function DropDown({ props }) {
     const [fetchedData, setFetchedData] = useState([]);
 
-    useEffect(() => fetchData(`/api/${foreignKey.tableName}`, handleFetchedData), []);
+    useEffect(
+        () => fetchData(`/api/${foreignKey.tableName}`, handleFetchedData),
+        []
+    );
 
     function handleFetchedData(data) {
         setFetchedData(data);
@@ -14,8 +17,8 @@ export default function DropDown({ props }) {
     function formatSelectOption(input) {
         let output = `${input[foreignKey.columnName]}: `;
 
-        foreignKey.dropdownColumnNames.forEach(fk => {
-            output = `${output} ${input[fk]}`
+        foreignKey.dropdownColumnNames.forEach((fk) => {
+            output = `${output} ${input[fk]}`;
         });
 
         return output;
@@ -30,14 +33,16 @@ export default function DropDown({ props }) {
         assigned,
         launchOperator,
         handleChange,
-        foreignKey
+        foreignKey,
     } = props;
 
     const foreignKeys = fetchedData.map((row, rowIndex) => (
-        <option 
+        <option
             key={tableName + columnName + "x" + rowIndex.toString()}
             value={row[foreignKey.columnName]}
-            selected={cellValue === row[foreignKey.columnName] ? "selected" : ""}
+            // selected={
+            //     cellValue === row[foreignKey.columnName] ? "selected" : ""
+            // }
         >
             {formatSelectOption(row)}
         </option>
@@ -46,9 +51,11 @@ export default function DropDown({ props }) {
     function getDisabledStatus() {
         const output =
             tableName === "Flights"
-                ? columnName === "AgencyID" && launchOperator.companyID !== "NULL"
+                ? columnName === "AgencyID" &&
+                  launchOperator.companyID !== "NULL"
                     ? true
-                    : columnName === "CompanyID" && launchOperator.agencyID !== "NULL"
+                    : columnName === "CompanyID" &&
+                      launchOperator.agencyID !== "NULL"
                     ? true
                     : assigned
                 : assigned;
@@ -59,7 +66,7 @@ export default function DropDown({ props }) {
         <Select
             id={columnName + "-input"}
             name={columnName}
-            defaultValue={cellValue}
+            value={cellValue ? cellValue : ""}
             isRequired={required}
             isReadOnly={readOnly}
             isDisabled={getDisabledStatus()}

@@ -20,14 +20,23 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
     let companyID = "NULL";
     if (data) {
         agencyID = "AgencyID" in data && data.AgencyID ? data.AgencyID : "NULL";
-        companyID = "CompanyID" in data && data.CompanyID ? data.CompanyID : "NULL";
-    };
-    const [launchOperator, setLaunchOperator] = useState({agencyID, companyID});
+        companyID =
+            "CompanyID" in data && data.CompanyID ? data.CompanyID : "NULL";
+    }
+    const [launchOperator, setLaunchOperator] = useState({
+        agencyID,
+        companyID,
+    });
+    const [formValidity, setFormValidity] = useState(false);
 
     useEffect(() => {
         if (dataValues.length && tableName === "Flights") {
-            const AgencyIdIndex = tableConstraints.Flights.columns.findIndex(col => col.columnName === "AgencyID");
-            const CompanyIdIndex = tableConstraints.Flights.columns.findIndex(col => col.columnName === "CompanyID");
+            const AgencyIdIndex = tableConstraints.Flights.columns.findIndex(
+                (col) => col.columnName === "AgencyID"
+            );
+            const CompanyIdIndex = tableConstraints.Flights.columns.findIndex(
+                (col) => col.columnName === "CompanyID"
+            );
             dataValues[AgencyIdIndex] = launchOperator.agencyID;
             dataValues[CompanyIdIndex] = launchOperator.companyID;
         }
@@ -41,15 +50,42 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
         tableName: tableName,
         data: dataValues,
         launchOperator: launchOperator,
-        setLaunchOperator: setLaunchOperator
+        setLaunchOperator: setLaunchOperator,
+        setFormValidity: setFormValidity,
     };
+
+    function validateFormData(formData) {
+        for (const key of formData.keys()) {
+            //console.log(`${key}: ${formData.get(key)}`);
+            const value = formData.get(key).trim();
+
+            if (value.length === 0) {
+                // Error
+            }
+
+            formData.set(key, value);
+        }
+    }
 
     function handleSave() {
         const formName = `${tableName}Form`;
         const form = document.getElementById(formName);
-        if (launchOperator.agencyID !== "NULL" || launchOperator.companyID !== "NULL" || tableName !== "Flights") {
-            if (launchOperator.agencyID === "NULL" || launchOperator.companyID === "NULL" || tableName !== "Flights") {
-                form.submit();
+        //const formData = new FormData(form);
+        //validateFormData(formData);
+
+        if (
+            launchOperator.agencyID !== "NULL" ||
+            launchOperator.companyID !== "NULL" ||
+            tableName !== "Flights"
+        ) {
+            if (
+                launchOperator.agencyID === "NULL" ||
+                launchOperator.companyID === "NULL" ||
+                tableName !== "Flights"
+            ) {
+                if (formValidity) {
+                    form.submit();
+                }
             }
         }
     }
@@ -77,11 +113,13 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
                             action={`/api/${tableName}`}
                             method={"POST"}
                         >
-                            {<input
-                                type={"hidden"}
-                                name={"_method"}
-                                value={data ? "PUT" : "POST"}
-                            ></input>}
+                            {
+                                <input
+                                    type={"hidden"}
+                                    name={"_method"}
+                                    value={data ? "PUT" : "POST"}
+                                ></input>
+                            }
                             <FormField props={props} />
                         </form>
                     </Flex>
