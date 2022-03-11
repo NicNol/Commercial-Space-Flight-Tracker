@@ -4,6 +4,7 @@ import { fetchData } from "../../../util/commonFunctions";
 
 export default function DropDown({ props }) {
     const [fetchedData, setFetchedData] = useState([]);
+    const [input, setInput] = useState(cellValue);
 
     useEffect(
         () => fetchData(`/api/${foreignKey.tableName}`, handleFetchedData),
@@ -12,6 +13,11 @@ export default function DropDown({ props }) {
 
     function handleFetchedData(data) {
         setFetchedData(data);
+    }
+
+    function handleInputChange(event) {
+        handleChange(event, columnName);
+        setInput(event.target.value);
     }
 
     function formatSelectOption(input) {
@@ -40,9 +46,6 @@ export default function DropDown({ props }) {
         <option
             key={tableName + columnName + "x" + rowIndex.toString()}
             value={row[foreignKey.columnName]}
-            // selected={
-            //     cellValue === row[foreignKey.columnName] ? "selected" : ""
-            // }
         >
             {formatSelectOption(row)}
         </option>
@@ -66,12 +69,12 @@ export default function DropDown({ props }) {
         <Select
             id={columnName + "-input"}
             name={columnName}
-            value={cellValue ? cellValue : ""}
+            value={input ? input : cellValue}
             isRequired={required}
             isReadOnly={readOnly}
             isDisabled={getDisabledStatus()}
-            variant={assigned ? "filled" : "outline"}
-            onChange={(event) => handleChange(event, columnName)}
+            variant={readOnly ? "filled" : "outline"}
+            onChange={(event) => handleInputChange(event)}
         >
             {required ? "" : <option value="NULL">NULL</option>}
             {foreignKeys}

@@ -1,26 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import tableConstraints from "../../../util/tableConstraints.json";
 import DataField from "./dataField";
 
 export default function FormField({ props }) {
-    const formStateData = [];
-    useEffect(() => {}, [formStateData]);
-
-    function checkFormValidity() {
-        if (formStateData.includes(false)) {
-            return setFormValidity(false);
-        }
-        return setFormValidity(true);
-    }
-
     const {
         onClose,
-        isOpen,
         tableName,
         data,
         launchOperator,
         setLaunchOperator,
-        setFormValidity,
+        saves,
     } = props;
 
     const handleChange = (event, columnName) => {
@@ -43,22 +32,13 @@ export default function FormField({ props }) {
 
     const formData = tableConstraints[tableName].columns.map(
         (column, index) => {
-            const {
-                columnName,
-                required,
-                readOnly,
-                assigned,
-                foreignKey,
-                datatype,
-            } = column;
+            const { columnName, required, readOnly, assigned, foreignKey } =
+                column;
 
             //Determine the value of the field
             let cellValue;
             if (data.length > 0) cellValue = data[index];
             else if (assigned) cellValue = "auto-assigned";
-
-            const [inputIsValid, setInputIsValid] = useState(true);
-            formStateData.push(inputIsValid);
 
             const childrenProps = {
                 cellValue: cellValue,
@@ -72,7 +52,7 @@ export default function FormField({ props }) {
                 handleChange: handleChange,
                 handleClose: handleClose,
                 launchOperator: launchOperator,
-                setInputIsValid: setInputIsValid,
+                saves: saves,
             };
 
             return (

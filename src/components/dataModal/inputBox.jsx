@@ -26,7 +26,7 @@ export default function InputBox({ props, type }) {
             required={required}
             isReadOnly={readOnly}
             isDisabled={assigned}
-            variant={assigned ? "filled" : "outline"}
+            variant={readOnly ? "filled" : "outline"}
             onChange={handleInputChange}
         />
     );

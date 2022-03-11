@@ -27,7 +27,8 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
         agencyID,
         companyID,
     });
-    const [formValidity, setFormValidity] = useState(false);
+
+    const [saves, setSaves] = useState(0);
 
     useEffect(() => {
         if (dataValues.length && tableName === "Flights") {
@@ -51,7 +52,7 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
         data: dataValues,
         launchOperator: launchOperator,
         setLaunchOperator: setLaunchOperator,
-        setFormValidity: setFormValidity,
+        saves: saves,
     };
 
     function validateFormData(formData) {
@@ -60,33 +61,34 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
             const value = formData.get(key).trim();
 
             if (value.length === 0) {
-                // Error
+                return false;
             }
 
             formData.set(key, value);
         }
+
+        return true;
     }
 
     function handleSave() {
+        setSaves(saves + 1);
         const formName = `${tableName}Form`;
         const form = document.getElementById(formName);
-        //const formData = new FormData(form);
-        //validateFormData(formData);
+        const formData = new FormData(form);
+        if (!validateFormData(formData)) {
+            return false;
+        }
 
+        if (tableName !== "Flights") {
+            form.submit();
+        }
+
+        const { agencyID, companyID } = launchOperator;
+        // Perform an exclusive OR between agencyID and companyID
         if (
-            launchOperator.agencyID !== "NULL" ||
-            launchOperator.companyID !== "NULL" ||
-            tableName !== "Flights"
+            agencyID === "NULL" ? !(companyID === "NULL") : companyID === "NULL"
         ) {
-            if (
-                launchOperator.agencyID === "NULL" ||
-                launchOperator.companyID === "NULL" ||
-                tableName !== "Flights"
-            ) {
-                if (formValidity) {
-                    form.submit();
-                }
-            }
+            form.submit();
         }
     }
 

@@ -11,15 +11,15 @@ import tableConstraints from "../../../util/tableConstraints.json";
 import DropDown from "./dropDown";
 import InputBox from "./inputBox";
 
-export default function DataField({ children, props }) {
+export default function DataField({ props }) {
     const {
         tableName,
         index,
         required,
         columnName,
-        setInputIsValid,
         handleChange,
         cellValue,
+        saves,
     } = props;
 
     const column = tableConstraints[tableName].columns.find(
@@ -34,7 +34,9 @@ export default function DataField({ children, props }) {
         handleChange(e, columnName);
     };
 
-    const isError = input === "";
+    const isError =
+        required &&
+        ((!input && saves > 0) || input?.toString().trim().length === 0);
 
     const helperText = <FormHelperText visibility={"hidden"}>.</FormHelperText>;
     const errorMessage = (
