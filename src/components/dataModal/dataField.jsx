@@ -37,7 +37,7 @@ export default function DataField({ props }) {
 
     const isError =
         required &&
-        !(foreignKey || datatype === Boolean || assigned) &&
+        !(foreignKey || datatype === "Boolean" || assigned) &&
         ((!input && saves > 0) ||
             input?.toString().trim().length === 0 ||
             (input?.length > 1 && datatype === "Number" && isNaN(input)));

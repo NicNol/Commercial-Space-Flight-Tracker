@@ -85,7 +85,6 @@ export default function FkDropDown({ props }) {
 
 export function BoolDropDown({ props }) {
     const {
-        cellValue,
         required,
         readOnly,
         columnName,
@@ -98,7 +97,7 @@ export function BoolDropDown({ props }) {
         <Select
             id={columnName + "-input"}
             name={columnName}
-            value={input ? input : cellValue}
+            value={input}
             isRequired={required}
             isReadOnly={readOnly}
             isDisabled={assigned}
