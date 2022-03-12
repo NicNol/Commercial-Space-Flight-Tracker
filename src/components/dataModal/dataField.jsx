@@ -8,7 +8,7 @@ import {
     FormLabel,
 } from "@chakra-ui/react";
 import tableConstraints from "../../../util/tableConstraints.json";
-import DropDown from "./dropDown";
+import FkDropDown, { BoolDropDown } from "./dropDown";
 import InputBox from "./inputBox";
 
 export default function DataField({ props }) {
@@ -37,7 +37,7 @@ export default function DataField({ props }) {
 
     const isError =
         required &&
-        !(foreignKey || datatype === Boolean || assigned) &&
+        !(foreignKey || datatype === "Boolean" || assigned) &&
         ((!input && saves > 0) ||
             input?.toString().trim().length === 0 ||
             (input?.length > 1 && datatype === "Number" && isNaN(input)));
@@ -60,9 +60,16 @@ export default function DataField({ props }) {
     );
     if (foreignKey)
         inputField = (
-            <DropDown
+            <FkDropDown
                 key={tableName + "-dropdown-" + index}
                 props={{ ...props, handleInputChange }}
+            />
+        );
+    if (columnName === "IsAstronaut")
+        inputField = (
+            <BoolDropDown
+                key={tableName + "-dropdown-" + index}
+                props={{ ...props, handleInputChange, input }}
             />
         );
 

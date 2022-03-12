@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Select } from "@chakra-ui/react";
 import { fetchData } from "../../../util/commonFunctions";
 
-export default function DropDown({ props }) {
+export default function FkDropDown({ props }) {
     const [fetchedData, setFetchedData] = useState([]);
     const [input, setInput] = useState(cellValue);
 
@@ -78,6 +78,34 @@ export default function DropDown({ props }) {
         >
             {required ? "" : <option value="NULL">NULL</option>}
             {foreignKeys}
+        </Select>
+    );
+}
+
+
+export function BoolDropDown({ props }) {
+    const {
+        required,
+        readOnly,
+        columnName,
+        assigned,
+        input,
+        handleInputChange,
+    } = props;
+
+    return (
+        <Select
+            id={columnName + "-input"}
+            name={columnName}
+            value={input}
+            isRequired={required}
+            isReadOnly={readOnly}
+            isDisabled={assigned}
+            variant={readOnly ? "filled" : "outline"}
+            onChange={handleInputChange}
+        >
+            <option value={0}>No</option>
+            <option value={1}>Yes</option>
         </Select>
     );
 }
