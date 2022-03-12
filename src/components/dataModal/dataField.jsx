@@ -20,6 +20,7 @@ export default function DataField({ props }) {
         handleChange,
         cellValue,
         saves,
+        assigned,
     } = props;
 
     const column = tableConstraints[tableName].columns.find(
@@ -36,11 +37,17 @@ export default function DataField({ props }) {
 
     const isError =
         required &&
-        ((!input && saves > 0) || input?.toString().trim().length === 0);
+        !(foreignKey || datatype === Boolean || assigned) &&
+        ((!input && saves > 0) ||
+            input?.toString().trim().length === 0 ||
+            (input?.length > 1 && datatype === "Number" && isNaN(input)));
 
     const helperText = <FormHelperText visibility={"hidden"}>.</FormHelperText>;
     const errorMessage = (
-        <FormErrorMessage>{columnName} is required.</FormErrorMessage>
+        <FormErrorMessage>
+            {columnName} is required. Its value should be a{" "}
+            {datatype.toLowerCase()}.
+        </FormErrorMessage>
     );
 
     //Determine the appropriate component for the field

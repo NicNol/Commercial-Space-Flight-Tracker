@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
+    Alert,
+    AlertIcon,
     Button,
     Flex,
     Modal,
@@ -15,6 +17,10 @@ import FormField from "./formField";
 import tableConstraints from "../../../util/tableConstraints.json";
 
 export default function DataModal({ onClose, isOpen, tableName, data }) {
+    /*************************************************************************
+     * The Flights Table has a Constraint that only an AgencyID or CompanyID may be
+     * selected, but not both. The following block manages the associated logic.
+     **************************************************************************/
     //Initialize starting value of FK dropdown from table data if available
     let agencyID = "NULL";
     let companyID = "NULL";
@@ -28,14 +34,13 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
         companyID,
     });
 
-    const [saves, setSaves] = useState(0);
-
     useEffect(() => {
         if (dataValues.length && tableName === "Flights") {
-            const AgencyIdIndex = tableConstraints.Flights.columns.findIndex(
+            const columns = tableConstraints.Flights.columns;
+            const AgencyIdIndex = columns.findIndex(
                 (col) => col.columnName === "AgencyID"
             );
-            const CompanyIdIndex = tableConstraints.Flights.columns.findIndex(
+            const CompanyIdIndex = columns.findIndex(
                 (col) => col.columnName === "CompanyID"
             );
             dataValues[AgencyIdIndex] = launchOperator.agencyID;
@@ -43,6 +48,21 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
         }
     }, [launchOperator]);
 
+    const flightsWarning =
+        tableName === "Flights" ? (
+            <Alert status="warning">
+                <AlertIcon />
+                AgencyID or CompanyID must be null, but not both.
+            </Alert>
+        ) : (
+            ""
+        );
+
+    /*************************************************************************
+     * END BLOCK
+     **************************************************************************/
+
+    const [saves, setSaves] = useState(0);
     const modalHeader = data ? "Edit Entry" : "New Entry";
     const dataValues = Object.values(data);
     const props = {
@@ -56,11 +76,22 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
     };
 
     function validateFormData(formData) {
+        const columns = tableConstraints[tableName]["columns"];
+
         for (const key of formData.keys()) {
             //console.log(`${key}: ${formData.get(key)}`);
             const value = formData.get(key).trim();
+            const thisColumn = columns.find(
+                (column) => column.columnName === key
+            );
 
-            if (value.length === 0) {
+            //Input value must have length > 0 if required
+            if (value.length === 0 && thisColumn?.required) {
+                return false;
+            }
+
+            //If data type should be a Number and the input value is not a number, return false
+            if (thisColumn?.datatype === "Number" && isNaN(value)) {
                 return false;
             }
 
@@ -105,6 +136,7 @@ export default function DataModal({ onClose, isOpen, tableName, data }) {
                 <ModalHeader>{modalHeader}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
+                    {flightsWarning}
                     <Flex gap={1} mb={4}>
                         <Text color={"red"}>*</Text>
                         <Text>Indicates a required field</Text>
