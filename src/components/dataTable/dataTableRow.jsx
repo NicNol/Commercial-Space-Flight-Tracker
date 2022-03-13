@@ -24,11 +24,17 @@ export default function DataTableRow({
                 if (input !== null) {
                     let mm, dd, yyyy;
                     [yyyy, mm, dd] = input.split("T")[0].split("-");
-                    output = `${mm}/${dd}/${yyyy}`;
-                }
+                    if (yyyy === "0000" && mm === "00" && dd === "00") {
+                        output = "NULL";  // display NULL if date is set to default value
+                    } else {
+                        output = `${mm}/${dd}/${yyyy}`;
+                    }
+                } else {
+                    output = "NULL";  // display NULL if date is empty
+                };
                 break;
             default:
-                output = input;
+                output = input ? input : "NULL";  // display NULL is field is empty
                 break;
         };
 
