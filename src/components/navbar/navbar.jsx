@@ -8,16 +8,13 @@ export default function Navbar() {
 
     return (
         <Flex
-            justifyContent={"flex-start"}
             flexDirection={"column"}
             w={"100%"}
-            mb={4}
             display={["block", null, null, "none"]}
         >
-            <Flex justifyContent={"center"}>
+            <Flex>
                 <Flex
                     as={"nav"}
-                    align={"center"}
                     justify={"space-between"}
                     wrap={"wrap"}
                     w={"100%"}
