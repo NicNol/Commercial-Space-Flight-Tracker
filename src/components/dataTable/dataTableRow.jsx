@@ -1,5 +1,5 @@
 import React from "react";
-import { Tr, Td } from "@chakra-ui/react";
+import { Text, Tr, Td } from "@chakra-ui/react";
 import ActionCell from "./actionCell";
 
 export default function DataTableRow({
@@ -8,6 +8,12 @@ export default function DataTableRow({
     displayActions,
     tableName,
 }) {
+    const formattedNull = (
+        <Text opacity={".4"} fontStyle={"italic"}>
+            NULL
+        </Text>
+    );
+
     function formatCell(columnName, input) {
         let output;
 
@@ -19,24 +25,29 @@ export default function DataTableRow({
                 output = `${input} km`;
                 break;
             case "LaunchDate":
-                // fall through to next case
+            // fall through to next case
             case "DateOfBirth":
                 if (input !== null) {
                     let mm, dd, yyyy;
                     [yyyy, mm, dd] = input.split("T")[0].split("-");
-                    output = `${mm}/${dd}/${yyyy}`;
+                    if (yyyy === "0000" && mm === "00" && dd === "00") {
+                        output = formattedNull; // display NULL if date is set to default value
+                    } else {
+                        output = `${mm}/${dd}/${yyyy}`;
+                    }
+                } else {
+                    output = formattedNull; // display NULL if date is empty
                 }
                 break;
             default:
-                output = input;
+                output = input ? input : formattedNull; // display NULL is field is empty
                 break;
-        };
+        }
 
         return output;
     }
-    
-    const dataValues = Object.entries(data);
 
+    const dataValues = Object.entries(data);
 
     const cells = dataValues.map(([prop, cell], cellIndex) => (
         <Td key={tableName + index.toString() + "x" + cellIndex.toString()}>

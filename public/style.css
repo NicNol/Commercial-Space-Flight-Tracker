@@ -9,13 +9,11 @@ body {
 a,
 a:visited {
     color: #666;
-    text-decoration-color: #666;
-    transition: 0.5s color, 0.5s text-decoration-color;
+    transition: 0.5s color;
 }
 
 a:hover {
     color: navy;
-    text-decoration-color: transparent;
 }
 
 .hidden {

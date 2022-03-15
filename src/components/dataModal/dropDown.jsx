@@ -2,20 +2,29 @@ import React, { useEffect, useState } from "react";
 import { Select } from "@chakra-ui/react";
 import { fetchData } from "../../../util/commonFunctions";
 
-export default function DropDown({ props }) {
+export default function FkDropDown({ props }) {
     const [fetchedData, setFetchedData] = useState([]);
+    const [input, setInput] = useState(cellValue);
 
-    useEffect(() => fetchData(`/api/${foreignKey.tableName}`, handleFetchedData), []);
+    useEffect(
+        () => fetchData(`/api/${foreignKey.tableName}`, handleFetchedData),
+        []
+    );
 
     function handleFetchedData(data) {
         setFetchedData(data);
     }
 
+    function handleInputChange(event) {
+        handleChange(event, columnName);
+        setInput(event.target.value);
+    }
+
     function formatSelectOption(input) {
         let output = `${input[foreignKey.columnName]}: `;
 
-        foreignKey.dropdownColumnNames.forEach(fk => {
-            output = `${output} ${input[fk]}`
+        foreignKey.dropdownColumnNames.forEach((fk) => {
+            output = `${output} ${input[fk]}`;
         });
 
         return output;
@@ -30,14 +39,13 @@ export default function DropDown({ props }) {
         assigned,
         launchOperator,
         handleChange,
-        foreignKey
+        foreignKey,
     } = props;
 
     const foreignKeys = fetchedData.map((row, rowIndex) => (
-        <option 
+        <option
             key={tableName + columnName + "x" + rowIndex.toString()}
             value={row[foreignKey.columnName]}
-            selected={cellValue === row[foreignKey.columnName] ? "selected" : ""}
         >
             {formatSelectOption(row)}
         </option>
@@ -46,9 +54,11 @@ export default function DropDown({ props }) {
     function getDisabledStatus() {
         const output =
             tableName === "Flights"
-                ? columnName === "AgencyID" && launchOperator.companyID !== "NULL"
+                ? columnName === "AgencyID" &&
+                  launchOperator.companyID !== "NULL"
                     ? true
-                    : columnName === "CompanyID" && launchOperator.agencyID !== "NULL"
+                    : columnName === "CompanyID" &&
+                      launchOperator.agencyID !== "NULL"
                     ? true
                     : assigned
                 : assigned;
@@ -59,15 +69,43 @@ export default function DropDown({ props }) {
         <Select
             id={columnName + "-input"}
             name={columnName}
-            defaultValue={cellValue}
+            value={input ? input : cellValue}
             isRequired={required}
             isReadOnly={readOnly}
             isDisabled={getDisabledStatus()}
-            variant={assigned ? "filled" : "outline"}
-            onChange={(event) => handleChange(event, columnName)}
+            variant={readOnly ? "filled" : "outline"}
+            onChange={(event) => handleInputChange(event)}
         >
             {required ? "" : <option value="NULL">NULL</option>}
             {foreignKeys}
+        </Select>
+    );
+}
+
+
+export function BoolDropDown({ props }) {
+    const {
+        required,
+        readOnly,
+        columnName,
+        assigned,
+        input,
+        handleInputChange,
+    } = props;
+
+    return (
+        <Select
+            id={columnName + "-input"}
+            name={columnName}
+            value={input}
+            isRequired={required}
+            isReadOnly={readOnly}
+            isDisabled={assigned}
+            variant={readOnly ? "filled" : "outline"}
+            onChange={handleInputChange}
+        >
+            <option value={0}>No</option>
+            <option value={1}>Yes</option>
         </Select>
     );
 }
