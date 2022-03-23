@@ -2,8 +2,9 @@
 
 Commercial Space Flight Tracker is a DBMS admin portal. The project is intended for administrators of a fictional website and allows access to change entries in a real mySQL database using a custom-built GUI. You can access a demo of this project [here](http://csft.herokuapp.com/).
 
-![Preview of Course Analytics Home Page](/public\images\preview1.png?raw=true)
-![Preview of Course Analytics Course Page](/public\images\preview2.png?raw=true)
+![Preview of Commercial Space Flight Tracker Table](/public/images/preview1.png?raw=true)
+![Preview of Commercial Space Fight Tracker Data Entry Modal](/public/images/preview2.png?raw=true)
+
 
 # API Calls
 
